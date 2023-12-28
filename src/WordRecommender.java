@@ -1,9 +1,26 @@
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Scanner;
+
 
 public class WordRecommender {
 
-    public WordRecommender(String dictionaryFile) {    
-      // TODO: change this!
+    private ArrayList <String> dictionaryList;
+
+    public WordRecommender(String dictionaryFile) throws FileNotFoundException {
+        FileInputStream fileByteStream = new FileInputStream(dictionaryFile);
+        Scanner scnr = new Scanner(fileByteStream);
+
+        this.dictionaryList = new ArrayList<>();
+        while(scnr.hasNext()){
+            dictionaryList.add(scnr.next());
+        }
+
+        scnr.close();
+
+
     }
   
     public double getSimilarity(String word1, String word2) {
@@ -12,9 +29,50 @@ public class WordRecommender {
     }
   
     public ArrayList<String> getWordSuggestions(String word, int tolerance, double commonPercent, int topN) {
-      // TODO: change this!
+
+        ArrayList<String> suggestionsList = new ArrayList<>();
+
+        for (int i = 0; i < dictionaryList.size(); i++){
+            boolean currentTolerance = Math.abs(word.length() - dictionaryList.get(i).length()) <= tolerance;
+            boolean currentPercent = commonPercent <= commonPercent(word, dictionaryList.get(i));
+            if (currentPercent && currentTolerance){
+                suggestionsList.add(dictionaryList.get(i));
+            }
+        }
+
+        System.out.println(suggestionsList);
+
+
       return null;
     }
+
+    public double commonPercent (String wordA, String wordB){
+
+        HashSet<Character> aSet = new HashSet<>();
+        for (int i = 0; i < wordA.length(); i++){
+            aSet.add(wordA.charAt(i));
+        }
+        HashSet<Character> bSet = new HashSet<>();
+        for (int i = 0; i < wordB.length(); i++){
+            bSet.add(wordB.charAt(i));
+        }
+
+        HashSet<Character> unionSet = new HashSet<>();
+        for (char currentChar: aSet){
+            if (bSet.contains(currentChar)){
+                unionSet.add(currentChar);
+            }
+        }
+
+        HashSet<Character> orSet = new HashSet<>();
+        orSet.addAll(aSet);
+        orSet.addAll(bSet);
+
+        return (double) unionSet.size() / orSet.size();
+    }
+
+
+
   
     
   }
