@@ -9,6 +9,7 @@ public class WordRecommender {
 
     private ArrayList <String> dictionaryList;
 
+
     public WordRecommender(String dictionaryFile) throws FileNotFoundException {
         FileInputStream fileByteStream = new FileInputStream(dictionaryFile);
         Scanner scnr = new Scanner(fileByteStream);
@@ -24,8 +25,39 @@ public class WordRecommender {
     }
   
     public double getSimilarity(String word1, String word2) {
-      // TODO: change this!
-      return 0.0;
+
+        double rightAlignment = 0.0;
+        for (int i = 0; i < word1.length() && i < word2.length(); i++){
+            if (word1.charAt(i) == word2.charAt(i)){
+                rightAlignment = rightAlignment + 1.0;
+            }
+        }
+
+        double leftAlignment = 0.0;
+        if (word1.length() > word2.length()){
+            String wordLonger = word1;
+            String wordShorter = word2;
+            for (int i = 0; i < wordShorter.length(); i++){
+                if (wordLonger.charAt((wordLonger.length() - i) - 1) == wordShorter.charAt((wordShorter.length() - i) - 1)){
+                    leftAlignment = leftAlignment + 1.0;
+                }
+            }
+
+        } else if (word2.length() > word1.length()) {
+            String wordLonger = word2;
+            String wordShorter = word1;
+            for (int i = 0; i < wordShorter.length(); i++){
+                if (wordLonger.charAt((wordLonger.length() - i) - 1) == wordShorter.charAt((wordShorter.length() - i) - 1)){
+                    leftAlignment = leftAlignment + 1;
+                }
+            }
+        } else {
+            leftAlignment = rightAlignment;
+        }
+
+//        System.out.println((leftAlignment + rightAlignment) / 2);
+
+      return (leftAlignment + rightAlignment) / 2;
     }
   
     public ArrayList<String> getWordSuggestions(String word, int tolerance, double commonPercent, int topN) {
@@ -40,7 +72,9 @@ public class WordRecommender {
             }
         }
 
-        System.out.println(suggestionsList);
+//        System.out.println(suggestionsList);
+
+
 
 
       return null;

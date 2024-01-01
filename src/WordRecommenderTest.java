@@ -21,7 +21,9 @@ class WordRecommenderTest {
 
 
     @Test
-    void getSimilarity() {
+    void getSimilarity() throws FileNotFoundException {
+        WordRecommender wrAlternativeDictionary = new WordRecommender("alternativeDictionary.txt");
+        wrAlternativeDictionary.getSimilarity("aghast", "gross");
     }
 
     @Test
