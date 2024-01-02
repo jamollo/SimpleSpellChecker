@@ -74,10 +74,27 @@ public class WordRecommender {
 
 //        System.out.println(suggestionsList);
 
+        ArrayList<String> topNList = new ArrayList<>();
+
+        for (int i = 0; i <= topN; i++){
+            double largestSimilarity = 0;
+            String bestWord = " ";
+            int indexOfBestWord = 0;
+            for (int j = 0; j < suggestionsList.size(); j++){
+                double similarity = getSimilarity(word, suggestionsList.get(j));
+
+                if (similarity > largestSimilarity){
+                    largestSimilarity = similarity;
+                    bestWord = suggestionsList.get(j);
+                    indexOfBestWord = j;
+                }
+            }
+            topNList.add(bestWord);
+            suggestionsList.remove(indexOfBestWord);
+        }
 
 
-
-      return null;
+      return topNList;
     }
 
     public double commonPercent (String wordA, String wordB){
