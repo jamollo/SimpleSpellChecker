@@ -75,8 +75,9 @@ public class WordRecommender {
 //        System.out.println(suggestionsList);
 
         ArrayList<String> topNList = new ArrayList<>();
+        int suggestionsSize = suggestionsList.size();
 
-        for (int i = 0; i <= topN; i++){
+        for (int i = 0; i < topN && i < suggestionsSize; i++){
             double largestSimilarity = 0;
             String bestWord = " ";
             int indexOfBestWord = 0;
@@ -92,6 +93,8 @@ public class WordRecommender {
             topNList.add(bestWord);
             suggestionsList.remove(indexOfBestWord);
         }
+
+//        System.out.println(topNList);
 
 
       return topNList;
