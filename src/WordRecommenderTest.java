@@ -59,4 +59,11 @@ class WordRecommenderTest {
         assertEquals(expectedList, actualList);
         assertEquals(expectedList.size(), actualList.size());
     }
+
+    @Test
+    void getDictionary() throws FileNotFoundException {
+        WordRecommender wrAlternativeDictionary = new WordRecommender("alternativeDictionary.txt");
+        ArrayList<String> actualDictList = wrAlternativeDictionary.getDictionaryList();
+        assertEquals(13, actualDictList.size());
+    }
 }

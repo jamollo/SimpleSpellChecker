@@ -23,7 +23,11 @@ public class WordRecommender {
 
 
     }
-  
+
+    public ArrayList<String> getDictionaryList() {
+        return dictionaryList;
+    }
+
     public double getSimilarity(String word1, String word2) {
 
         double rightAlignment = 0.0;
