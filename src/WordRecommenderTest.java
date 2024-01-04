@@ -17,27 +17,27 @@ class WordRecommenderTest {
 
     @Test
     void testAlternativeDictionary() throws FileNotFoundException {
-        WordRecommender wrAlternativeDictionary = new WordRecommender("alternativeDictionary.txt");
+        WordRecommender wrAlternativeDictionary = new WordRecommender("altDictionary.txt");
     }
 
 
     @Test
     void getSimilarityWithSimilarity() throws FileNotFoundException {
-        WordRecommender wrAlternativeDictionary = new WordRecommender("alternativeDictionary.txt");
+        WordRecommender wrAlternativeDictionary = new WordRecommender("altDictionary.txt");
         double actualAnswer = wrAlternativeDictionary.getSimilarity("aghast", "gross");
         assertEquals(1.5, actualAnswer);
     }
 
     @Test
     void getSimilarityZeroSimilarity() throws FileNotFoundException {
-        WordRecommender wrAlternativeDictionary = new WordRecommender("alternativeDictionary.txt");
+        WordRecommender wrAlternativeDictionary = new WordRecommender("altDictionary.txt");
         double actualAnswer = wrAlternativeDictionary.getSimilarity("bat", "dog");
         assertEquals(0, actualAnswer);
     }
 
     @Test
     void getWordSuggestionsDefaultParameters() throws FileNotFoundException {
-        WordRecommender wrAlternativeDictionary = new WordRecommender("alternativeDictionary.txt");
+        WordRecommender wrAlternativeDictionary = new WordRecommender("altDictionary.txt");
         ArrayList<String> actualList = wrAlternativeDictionary.getWordSuggestions("morbit", 2, .5, 4);
         ArrayList<String> expectedList = new ArrayList<>();
         expectedList.add("morbid");
@@ -50,7 +50,7 @@ class WordRecommenderTest {
 
     @Test
     void getWordSuggestionsChangeParameters() throws FileNotFoundException {
-        WordRecommender wrAlternativeDictionary = new WordRecommender("alternativeDictionary.txt");
+        WordRecommender wrAlternativeDictionary = new WordRecommender("altDictionary.txt");
         ArrayList<String> actualList = wrAlternativeDictionary.getWordSuggestions("morbit", 1, .25, 3);
         ArrayList<String> expectedList = new ArrayList<>();
         expectedList.add("morbid");
@@ -62,8 +62,8 @@ class WordRecommenderTest {
 
     @Test
     void getDictionary() throws FileNotFoundException {
-        WordRecommender wrAlternativeDictionary = new WordRecommender("alternativeDictionary.txt");
+        WordRecommender wrAlternativeDictionary = new WordRecommender("altDictionary.txt");
         ArrayList<String> actualDictList = wrAlternativeDictionary.getDictionaryList();
-        assertEquals(13, actualDictList.size());
+        assertEquals(28, actualDictList.size());
     }
 }
